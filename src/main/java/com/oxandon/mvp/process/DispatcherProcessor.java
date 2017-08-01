@@ -108,8 +108,8 @@ public class DispatcherProcessor extends AbstractProcessor {
         List<String> codes = new ArrayList<>();
         List<String> imports = new ArrayList<>();
         imports.add("android.support.annotation.NonNull");
-        imports.add("com.oxandon.found.arch.impl.MvpDispatcher");
-        imports.add("com.oxandon.found.arch.protocol.IMvpPresenter");
+        imports.add("com.oxandon.mvp.arch.impl.MvpDispatcher");
+        imports.add("com.oxandon.mvp.arch.protocol.IMvpPresenter");
         imports.add("java.util.ArrayList");
         imports.add("java.util.List");
 
