@@ -44,19 +44,27 @@ public class DispatcherProcessor extends AbstractProcessor {
     public boolean process(Set<? extends TypeElement> set, RoundEnvironment roundEnvironment) {
         Set<? extends Element> controllers = roundEnvironment.getElementsAnnotatedWith(Controller.class);
         if (null == controllers || controllers.size() == 0) {
+            //代码中没有使用@Controller注解
             return false;
         }
         Set<? extends Element> dispatchers = roundEnvironment.getElementsAnnotatedWith(Dispatcher.class);
         if (null == dispatchers || dispatchers.size() != 1) {
+            //没有使用@Dispatcher注解，不需要注解自动生成
             return false;
         }
         final Element dispatcher = dispatchers.iterator().next();
+        final Dispatcher dispatcherAnnotation = dispatcher.getAnnotation(Dispatcher.class);
+        if (!dispatcherAnnotation.live()) {
+            //代码不需改动时此标志设置为false可加快编译速度
+            return false;
+        }
         ElementInfo info = new ElementInfo(dispatcher);
         if (null == info.getFile()) {
+            //获取输出文件位置失败
             return false;
         }
         Map<String, List<Element>> maps = collectByModule(controllers);
-        String outputName = dispatcher.getAnnotation(Dispatcher.class).value();
+        String outputName = dispatcherAnnotation.value();
         if (null == outputName || outputName.length() == 0) {
             outputName = dispatcher.getSimpleName().toString() + "Dispatcher";
         }
