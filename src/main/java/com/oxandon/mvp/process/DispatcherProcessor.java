@@ -29,7 +29,7 @@ import javax.lang.model.element.TypeElement;
  * Created by peng on 2017/7/31.
  */
 @AutoService(Processor.class)
-@SupportedSourceVersion(SourceVersion.RELEASE_7)
+@SupportedSourceVersion(SourceVersion.RELEASE_8)
 public class DispatcherProcessor extends AbstractProcessor {
 
     @Override
